@@ -7,13 +7,16 @@
     margin: 0;
     padding: 12px;
     border-top: 1px solid var(--border);
-
-    @media (max-width: 1024px) {
+    
+    @media (max-width: 768px) {
+        padding: 0;
         border-right: none;
         border-bottom: 1px solid var(--border);
+        width: 100%;
     }
 
 }
+
 
 .habits-input {
     display: flex;
@@ -21,7 +24,17 @@
     justify-content: center;
     padding: 20px;
     min-height: 30px;
+    
+    @media (max-width: 768px) {
+        min-height: 50px;
+        gap: 10px;
+        padding: 10px 20px;
+        margin: 0;
+        flex-direction: column;
+    }
+    
 }
+
 
 ul {
     flex: 1;
@@ -33,6 +46,8 @@ ul {
     gap: 8px;
     overflow-y: auto;
     box-sizing: border-box;
+
+
 }
 
 li {
@@ -111,6 +126,7 @@ a {
         width: 18px;
     }
 }
+
 .habit-timer {
     font-size: 1em;
     font-family: 'Martian';

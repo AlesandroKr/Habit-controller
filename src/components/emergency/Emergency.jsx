@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './EmergencyStyle.css'
 
 export default function Emergency() {
 
     const [count, setCount] = useState(0)
+
+    const sound = useRef(new Audio('/click.mp3'));
+
+    const pressed = () => {
+        sound.current.currentTime = 0;
+        sound.current.play();
+        setCount((count) => count + 1)
+    };
 
     return (
         <>
@@ -12,7 +20,7 @@ export default function Emergency() {
                     <button
                         className='emergency-btn'
                         type="button"
-                        onClick={() => setCount((count) => count + 1)}>
+                        onClick={pressed}>
                         <span className='emergency-btn-front'>
                             <h1>
                                 <i className="ri-error-warning-line"></i>

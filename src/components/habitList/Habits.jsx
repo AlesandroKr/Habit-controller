@@ -79,7 +79,7 @@ function HabitItem({ habit, onDelete, onSelect, editing, isSelected }) {
                 {meses > 0 && <>{pad(meses)}m : </>}
                 {dias > 0 && <>{pad(dias)}d : </>}
                 {horas > 0 && <>{pad(horas)}h : </>}
-                {pad(minutos)}m  {!dias>0 &&<>: {pad(segundos)}s</> }
+                {pad(minutos)}m  {dias>=0 &&<>: {pad(segundos)}s</> }
             </span>
             <button onClick={(e) => { e.stopPropagation(); onDelete(); }}>
                 <i className="ri-delete-bin-line"></i>

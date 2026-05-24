@@ -13,12 +13,12 @@ function calcularDiferencia(startDate) {
     });
 
     return {
-        años: duration.years,
-        meses: duration.months,
-        dias: duration.days,
-        horas: duration.hours,
-        minutos: duration.minutes,
-        segundos: duration.seconds,
+        años: duration.years ?? 0,
+        meses: duration.months ?? 0,
+        dias: duration.days ?? 0,
+        horas: duration.hours ?? 0,
+        minutos: duration.minutes ?? 0,
+        segundos: duration.seconds ?? 0,
     };
 }
 
