@@ -1,0 +1,24 @@
+#habits-panel {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+    text-align: left;
+    .icon {
+        margin-bottom: 16px;
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.habit-controller {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+
+}
