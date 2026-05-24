@@ -20,14 +20,17 @@ export default function HabitRegisterPanel() {
 
     return (
         <section id='habits-panel'>
-            <h2>List of habits</h2>
-            <p>Your recorded habits</p>
+            <div className='panel-decription'>
+                <h2>List of habits</h2>
+                <p>Your recorded habits</p>
+            </div>
             <div className='habit-controller'>
                 <Habits
                     habits={habits}
                     setHabits={setHabits}
                     onSelectHabit={setSelectedHabit}
                     editing={editing}
+                    selectedHabit={selectedHabit}
                 />
                 <HabitDetail
                     habit={selectedHabit}

@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
+import { intervalToDuration } from 'date-fns';
 
-export function calcularDiferencia(startDate) {
-    const diff = Date.now() - new Date(startDate).getTime();
+function calcularDiferencia(startDate) {
 
-    const segundos = Math.floor(diff / 1000) % 60;
-    const minutos  = Math.floor(diff / 1000 / 60) % 60;
-    const horas    = Math.floor(diff / 1000 / 60 / 60) % 24;
-    const dias     = Math.floor(diff / 1000 / 60 / 60 / 24);
+    if (!startDate) return {
+        años: 0, meses: 0, dias: 0, horas: 0, minutos: 0, segundos: 0
+    };
 
-    return { dias, horas, minutos, segundos };
+    const duration = intervalToDuration({
+        start: new Date(startDate),
+        end: new Date()
+    });
+
+    return {
+        años: duration.years,
+        meses: duration.months,
+        dias: duration.days,
+        horas: duration.hours,
+        minutos: duration.minutes,
+        segundos: duration.seconds,
+    };
 }
 
 export function useElapsedTime(startDate) {

@@ -1,23 +1,45 @@
+@font-face {
+    font-family: 'Departure';
+    src: url('/fonts/DepartureMono-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Martian';
+    src: url('/fonts/MartianMono-CnRg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 #habit-detail-panel {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 1;
-    /* border: 1px solid red; */
+    border-top: 1px solid var(--border);
     padding: 12px;
 }
 
-#habit-detail-panel * {
-    /* border: 1px solid red; */
-}
 
 .habit-title {
     text-decoration: underline;
 }
 
-.habit-timer {
-    font-size: 2em;
+.habit-timer-detail {
+    font-size: 1.2em;
     margin: 30px;
+    font-family: 'Martian';
     font-weight: 600;
+    display: inline-flex;
+    border-radius: 4px;
+    color: var(--text-h);
+    line-height: 135%;
+    padding: 4px 8px;
+    background: var(--code-bg);
+    border: 1px solid #252525;
 }

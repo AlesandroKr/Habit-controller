@@ -4,7 +4,7 @@ import './HabitsStyle.css'
 import { useElapsedTime } from '../../hooks/useElapsedTime';
 
 
-export default function Habits({ habits, setHabits, onSelectHabit, editing }) {
+export default function Habits({ habits, setHabits, onSelectHabit, editing, selectedHabit }) {
 
     const [newHabit, setNewHabit] = useState("");
     const [newDate, setNewDate] = useState("");
@@ -32,8 +32,7 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing }) {
 
     return (
         <div id="habits">
-
-            <div>
+            <div className="habits-input">
                 <input
                     type="text"
                     value={newHabit}
@@ -58,6 +57,7 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing }) {
                             onDelete={() => deleteHabit(index)}
                             onSelect={() => onSelectHabit(habit)}
                             editing={editing}
+                            isSelected={selectedHabit?.id === habit.id}
                         />) :
                     <span className="loading"> There aren't any habit yet ... add one</span>}
             </ul>
@@ -65,13 +65,22 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing }) {
     );
 }
 
-function HabitItem({ habit, onDelete, onSelect, editing }) {
-    const { dias, horas, minutos, segundos } = useElapsedTime(habit.startDate);
+function HabitItem({ habit, onDelete, onSelect, editing, isSelected }) {
+    const { años, meses, dias, horas, minutos, segundos } = useElapsedTime(habit.startDate);
+
+    const pad = (n) => String(n).padStart(2, '0');
+
 
     return (
-        <li onClick={!editing ? onSelect : undefined}>
+        <li className={isSelected ? "selected" : ""} onClick={!editing ? onSelect : undefined}>
             <span>{habit.text}</span>
-            <span>{dias}d {horas}h {minutos}m {segundos}s</span>
+            <span className='habit-timer'>
+                {años > 0 && <>{pad(años)}a : </>}
+                {meses > 0 && <>{pad(meses)}m : </>}
+                {dias > 0 && <>{pad(dias)}d : </>}
+                {horas > 0 && <>{pad(horas)}h : </>}
+                {pad(minutos)}m  {!dias>0 &&<>: {pad(segundos)}s</> }
+            </span>
             <button onClick={(e) => { e.stopPropagation(); onDelete(); }}>
                 <i className="ri-delete-bin-line"></i>
             </button>

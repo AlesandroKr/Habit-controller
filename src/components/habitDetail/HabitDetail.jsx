@@ -1,11 +1,12 @@
 import './HabitDetailStyle.css'
+
 import { useElapsedTime } from '../../hooks/useElapsedTime';
 import { useState } from 'react';
 
 export default function HabitDetail({ habit, setHabits, setSelectedHabit, editing, setEditing }) {
 
 
-    const { dias, horas, minutos, segundos } = useElapsedTime(habit?.startDate);
+    const { años, meses, dias, horas, minutos, segundos } = useElapsedTime(habit?.startDate);
 
     const [editData, setEditData] = useState({});
 
@@ -34,6 +35,8 @@ export default function HabitDetail({ habit, setHabits, setSelectedHabit, editin
         );
     }
 
+    const pad = (n) => String(n).padStart(2, '0');
+
     return (
         <div id="habit-detail-panel">
             {editing ? <input
@@ -41,7 +44,13 @@ export default function HabitDetail({ habit, setHabits, setSelectedHabit, editin
                 value={editData.text || ""}
                 onChange={(e) => setEditData(prev => ({ ...prev, text: e.target.value }))}
             /> : <h2 className='habit-title'>{habit.text}</h2>}
-            <span className='habit-timer'>{dias}d {horas}h {minutos}m {segundos}s</span>
+            <span className='habit-timer-detail'>
+                {años > 0 && <>{pad(años)}a : </>}
+                {meses > 0 && <>{pad(meses)}m : </>}
+                {dias > 0 && <>{pad(dias)}d : </>}
+                {horas > 0 && <>{pad(horas)}h : </>}
+                {pad(minutos)}m : {pad(segundos)}s
+            </span>
             <div>
                 Datos
                 {!editing ? <button onClick={startEditing}>Edit</button> : <></>}
