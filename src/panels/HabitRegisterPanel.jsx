@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import Habits from '../components/habitList/Habits'
 import HabitDetail from '../components/habitDetail/HabitDetail'
+import HabitDiary from '../components/habitDiary/HabitDiary';
 
 import './HabitsRegisterPanelStyle.css'
 
 export default function HabitRegisterPanel() {
+
+
+    //habits
     const [habits, setHabits] = useState(() => {
         const saved = localStorage.getItem("habits");
         return saved ? JSON.parse(saved) : [];
@@ -12,33 +16,65 @@ export default function HabitRegisterPanel() {
     const [selectedHabit, setSelectedHabit] = useState(null);
 
 
-    useEffect(() => {
-        localStorage.setItem("habits", JSON.stringify(habits));
-    }, [habits]);
+
 
     const [editing, setEditing] = useState(false);
 
+
+    //diaryhabit
+    const [diaryHabits, setDiaryHabits] = useState(() => {
+        const saved = localStorage.getItem("diaryHabits");
+        return saved ? JSON.parse(saved) : [];
+    });
+
+    const [selectedDiaryHabit, setselectedDiaryHabit] = useState(null);
+
+    //Save data in localStorage
+    useEffect(() => {
+        localStorage.setItem("habits", JSON.stringify(habits));
+        localStorage.setItem("diaryHabits", JSON.stringify(diaryHabits));
+    }, [habits, diaryHabits]);
+
+
+
     return (
-        <section id='habits-panel'>
-            <div className='panel-decription'>
-                <h2>List of habits</h2>
-                <p>Your recorded habits</p>
-            </div>
-            <div className='habit-controller'>
+    <section id='habits-panel'>
+        <div className='habit-controller'>
+            <div className='habit-list'>
                 <Habits
                     habits={habits}
                     setHabits={setHabits}
-                    onSelectHabit={setSelectedHabit}
+                    onSelectHabit={(h) => {
+                        setSelectedHabit(h);
+                        setselectedDiaryHabit(null); 
+                    }}
                     editing={editing}
                     selectedHabit={selectedHabit}
                 />
-                <HabitDetail
-                    habit={selectedHabit}
-                    setHabits={setHabits}
-                    setSelectedHabit={setSelectedHabit}
-                    setEditing={setEditing}
-                    editing={editing} />
+                <HabitDiary
+                    diaryHabits={diaryHabits}
+                    setDiaryHabits={setDiaryHabits}
+                    onSelectHabit={(dh) => {
+                        setselectedDiaryHabit(dh);
+                        setSelectedHabit(null);
+                    }}
+                    editing={editing}
+                    selectedHabit={selectedDiaryHabit} 
+                />
             </div>
-        </section>
-    );
+            
+            <HabitDetail
+                key={selectedDiaryHabit?.id || selectedHabit?.id || 'sin-seleccion'}
+                habit={selectedHabit}
+                diaryHabit={selectedDiaryHabit}
+                setHabits={setHabits}
+                setDiaryHabits={setDiaryHabits}
+                setSelectedHabit={setSelectedHabit}
+                setSelectedDiaryHabit={setselectedDiaryHabit}
+                setEditing={setEditing}
+                editing={editing} 
+            />
+        </div>
+    </section>
+);
 }

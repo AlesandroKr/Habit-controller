@@ -1,33 +1,27 @@
 import { useState } from "react";
-
-import './HabitsStyle.css'
-import { useElapsedTime } from '../../hooks/useElapsedTime';
+import './HabitDiaryStyle.css'
 
 
-export default function Habits({ habits, setHabits, onSelectHabit, editing, selectedHabit }) {
+export default function HabitDiary({ diaryHabits, setDiaryHabits, onSelectHabit, editing, selectedHabit }) {
 
     const [newHabit, setNewHabit] = useState("");
-    const [newDate, setNewDate] = useState("");
-
 
     const addHabit = () => {
-        if (!newHabit || !newDate) return;
-        setHabits([...habits,
+        if (!newHabit) return;
+        setDiaryHabits([...diaryHabits,
         {
             id: Date.now(),
             text: newHabit,
             createdAt: new Date().toISOString(),
             dueDate: null,
-            startDate: newDate,
             meta: 0,
         }
         ]);
         setNewHabit("");
-        setNewDate("");
     };
 
     const deleteHabit = (index) => {
-        setHabits(habits.filter((_, i) => i !== index));
+        setDiaryHabits(diaryHabits.filter((_, i) => i !== index));
     }
 
     return (
@@ -43,25 +37,20 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing, sele
                     onChange={(h) => setNewHabit(h.target.value)}
                     placeholder="Write a new habit"
                 />
-                <input
-                    id="date-habit"
-                    type="datetime-local"
-                    value={newDate}
-                    onChange={(e) => setNewDate(e.target.value)}
-                />
+
                 <button onClick={addHabit}>Add</button>
             </div>
 
             <ul>
-                {habits && habits.length > 0 ?
-                    habits.map((habit, index) =>
+                {diaryHabits && diaryHabits.length > 0 ?
+                    diaryHabits.map((diaryHabits, index) =>
                         <HabitItem
                             key={index}
-                            habit={habit}
+                            diaryHabits={diaryHabits}
                             onDelete={() => deleteHabit(index)}
-                            onSelect={() => onSelectHabit(habit)}
+                            onSelect={() => onSelectHabit(diaryHabits)}
                             editing={editing}
-                            isSelected={selectedHabit?.id === habit.id}
+                            isSelected={selectedHabit?.id === diaryHabits.id}
                         />) :
                     <span className="loading"> There aren't any habit yet ... add one</span>}
             </ul>
@@ -69,22 +58,11 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing, sele
     );
 }
 
-function HabitItem({ habit, onDelete, onSelect, editing, isSelected }) {
-    const { años, meses, dias, horas, minutos, segundos } = useElapsedTime(habit.startDate);
-
-    const pad = (n) => String(n).padStart(2, '0');
-
+function HabitItem({ diaryHabits, onDelete, onSelect, editing, isSelected }) {
 
     return (
         <li className={isSelected ? "selected" : ""} onClick={!editing ? onSelect : undefined}>
-            <span>{habit.text}</span>
-            <span className='habit-timer'>
-                {años > 0 && <>{pad(años)}a : </>}
-                {meses > 0 && <>{pad(meses)}m : </>}
-                {dias > 0 && <>{pad(dias)}d : </>}
-                {horas > 0 && <>{pad(horas)}h : </>}
-                {pad(minutos)}m  {dias >= 0 && <>: {pad(segundos)}s</>}
-            </span>
+            <span>{diaryHabits.text}</span>
             <button onClick={(e) => { e.stopPropagation(); onDelete(); }}>
                 <i className="ri-delete-bin-line"></i>
             </button>

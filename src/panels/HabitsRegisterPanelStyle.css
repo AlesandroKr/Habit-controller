@@ -3,6 +3,7 @@
     flex-direction: column;
     border-top: 1px solid var(--border);
     text-align: left;
+
     .icon {
         margin-bottom: 16px;
         width: 22px;
@@ -15,12 +16,14 @@
     }
 }
 
-.panel-decription
-{
+.panel-description {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    border: none;
+    padding: 15px;
+    box-sizing: border-box;
+    margin: 0;
+    border-bottom: 1px solid var(--border);
 }
 
 .habit-controller {
@@ -30,8 +33,21 @@
     justify-content: center;
 
     @media (max-width: 768px) {
-        
+
         flex-direction: column;
     }
 
+}
+
+.habit-list {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+
+        width: 100%;
+        flex-direction: column;
+    }
 }

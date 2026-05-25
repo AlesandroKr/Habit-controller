@@ -2,10 +2,10 @@
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    height: 40dvh;
-    width: 60%;
+    height: 50dvh;
+    width: 100%;
     margin: 0;
-    padding: 12px;
+    box-sizing: border-box;
     border-top: 1px solid var(--border);
     
     @media (max-width: 768px) {
@@ -42,7 +42,7 @@ ul {
     flex-direction: column;
     align-items: center;
     list-style: none;
-    padding: 12px;
+    padding: 20px;
     gap: 8px;
     overflow-y: auto;
     box-sizing: border-box;
