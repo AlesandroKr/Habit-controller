@@ -1,6 +1,7 @@
 
 
 #emergency-panel {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -12,9 +13,24 @@
         padding: 32px 20px 24px;
         gap: 18px;
     }
+    
+}
+
+.emergency-description
+{
+    top: 50%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    gap: 20px;
 }
 
 .emergency-btn-back {
+    position: absolute;
+    top: 35%;
     display: block;
     background: rgba(92, 103, 125, 1);
     width: 180px;
@@ -22,9 +38,9 @@
     border-radius: 50%;
     outline-offset: 4px;
     user-select: none;
+    border: none;
     -webkit-tap-highlight-color: transparent;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    
 }
 
 .emergency-btn {
