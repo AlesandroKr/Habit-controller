@@ -50,6 +50,10 @@ export default function HabitDetail({ habit, diaryHabit, setDiaryHabits, setHabi
     if (diaryHabit) {
         return (
             <div id="habit-detail-panel" >
+                <div className='panel-description'>
+                    <h2>Bad Habits</h2>
+                    <p>Your recorded habits</p>
+                </div>
                 {editing ?
                     (
                         <input type="text" value={editData.text || ""} onChange={(e) => setEditData(prev => ({ ...prev, text: e.target.value }))} />
@@ -75,7 +79,7 @@ export default function HabitDetail({ habit, diaryHabit, setDiaryHabits, setHabi
 
     // VISTA 2: SI ES HÁBITO NORMAL (LLEVA EL TIMER)
     return (
-        <div id="habit-detail-panel" className="panel-general">
+        <div id="habit-detail-panel">
             {editing ? (
                 <input type="text" value={editData.text || ""} onChange={(e) => setEditData(prev => ({ ...prev, text: e.target.value }))} />
             ) : (

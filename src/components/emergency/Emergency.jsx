@@ -70,13 +70,17 @@ export default function Emergency() {
                             You pressed it {count} times.
                         </span>
                     </div>
+
                 </>)}
 
                 {!juegoTerminado ?
                     (
                         <>{!juegoSalir && (
-                            <div style={{ position: 'absolute', top: '20px', left: '20px', fontSize: '1.2rem' }}>
-                                Objetivo: Caza el botón. Clics restantes: <strong>{clicksRestantes}</strong>
+                            <div className='emergency-btn-goal'>
+                                <h3>Objetivo: Caza el botón</h3> 
+                                <p>
+                                    Clics restantes: <strong>{clicksRestantes}</strong>
+                                </p>
                             </div>
                         )}
                             <button
