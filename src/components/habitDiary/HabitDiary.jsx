@@ -15,6 +15,7 @@ export default function HabitDiary({ diaryHabits, setDiaryHabits, onSelectHabit,
             createdAt: new Date().toISOString(),
             dueDate: null,
             meta: 0,
+            days: 0,
         }
         ]);
         setNewHabit("");
@@ -27,8 +28,8 @@ export default function HabitDiary({ diaryHabits, setDiaryHabits, onSelectHabit,
     return (
         <div id="habits">
             <div className='panel-description'>
-                <h2>Bad Habits</h2>
-                <p>Your recorded habits</p>
+                <h2>Diary Habits</h2>
+                <p>Register how is going on your habits everyday</p>
             </div>
             <div className="habits-input">
                 <input

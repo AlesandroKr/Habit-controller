@@ -9,9 +9,17 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing, sele
     const [newHabit, setNewHabit] = useState("");
     const [newDate, setNewDate] = useState("");
 
+    const maxDateTime = new Date().toISOString().slice(0, 16);
+
 
     const addHabit = () => {
         if (!newHabit || !newDate) return;
+
+        if (new Date(newDate) > new Date()) {
+            alert("No puedes registrar un hábito con una fecha futura.");
+            return;
+        }
+
         setHabits([...habits,
         {
             id: Date.now(),
@@ -46,7 +54,9 @@ export default function Habits({ habits, setHabits, onSelectHabit, editing, sele
                 <input
                     id="date-habit"
                     type="datetime-local"
+                    placeholder="Insert a date"
                     value={newDate}
+                    max={maxDateTime}
                     onChange={(e) => setNewDate(e.target.value)}
                 />
                 <button onClick={addHabit}>Add</button>
